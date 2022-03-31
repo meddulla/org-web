@@ -81,7 +81,6 @@ export default accessToken => {
           reader.readAsText(response.fileBlob);
         })
         .catch(error => {
-          console.error(e);
           console.error(error);
           localStorage.clear();
           reject();
