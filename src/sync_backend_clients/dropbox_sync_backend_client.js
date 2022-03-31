@@ -81,12 +81,19 @@ export default accessToken => {
           reader.readAsText(response.fileBlob);
         })
         .catch(error => {
-          if (!!error.error && JSON.parse(error.error).error['.tag'] === 'expired_access_token') {
-            localStorage.clear();
-            reject();
-          }
-          if (!!error.error && JSON.parse(error.error).error.path['.tag'] === 'not_found') {
-            reject();
+          try {
+            if (!!error.error && JSON.parse(error.error).error['.tag'] === 'expired_access_token') {
+              localStorage.clear();
+              reject();
+            }
+            if (!!error.error && JSON.parse(error.error).error.path['.tag'] === 'not_found') {
+              reject();
+            }
+          } catch(e) {
+              console.error(e);
+              console.error(error);
+              localStorage.clear();
+              reject();
           }
         })
     );
