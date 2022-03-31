@@ -81,6 +81,11 @@ export default accessToken => {
           reader.readAsText(response.fileBlob);
         })
         .catch(error => {
+          console.error(e);
+          console.error(error);
+          localStorage.clear();
+          reject();
+          /*
           try {
             if (!!error.error && JSON.parse(error.error).error['.tag'] === 'expired_access_token') {
               localStorage.clear();
@@ -95,6 +100,7 @@ export default accessToken => {
               localStorage.clear();
               reject();
           }
+          */
         })
     );
 
